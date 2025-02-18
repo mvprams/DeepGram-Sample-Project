@@ -8,8 +8,8 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Button Content="Pick Audio File" HorizontalAlignment="Left" Margin="39,50,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-        <TextBox HorizontalAlignment="Left" Margin="152,46,0,0" TextWrapping="Wrap" Text="insert audio file" VerticalAlignment="Top" Width="165" Height="28"/>
-        <TextBlock HorizontalAlignment="Left" Margin="39,102,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="300" Width="715"/>
+        <TextBox Name="tb_fileName" HorizontalAlignment="Left" Margin="152,46,0,0" TextWrapping="Wrap" Text="insert audio file" VerticalAlignment="Top" Width="165" Height="28"/>
+        <TextBlock Name="tbb_response" HorizontalAlignment="Left" Margin="39,102,0,0" TextWrapping="Wrap" Text="Response will appear here" VerticalAlignment="Top" Height="300" Width="715"/>
 
     </Grid>
 </Window>

@@ -9,4 +9,8 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Deepgram" Version="5.1.0" />
+  </ItemGroup>
+
 </Project>
