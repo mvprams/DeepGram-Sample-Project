@@ -15,7 +15,7 @@ namespace DeepGram_Sample_Project
     /// </summary>
     public partial class MainWindow : Window
     {
-        internal static string apiKey = "{APIKEY_HERE}";
+        internal static string apiKey = "{Api_key}";
         internal static string apiUrl = "https://api.deepgram.com/v1/listen?smart_format=true&model=nova-2&language=en-US";
         internal static string jsonPayload = "{\"url\":\"https://static.deepgram.com/examples/Bueller-Life-moves-pretty-fast.wav\"}";
         internal static string path = String.Empty;
@@ -27,23 +27,12 @@ namespace DeepGram_Sample_Project
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            // Initialize Library with default logging ("Info" level)
-            Library.Initialize();
-
-            // The API key we created in step 3
-            //var deepgramClient = new ListenRESTClient(secret2);
-
-            // Hosted sample file
-            //var audioUrl = "https://static.deepgram.com/examples/Bueller-Life-moves-pretty-fast.wav";
-            try
+            OpenFileDialog dialog = new OpenFileDialog();
+            if (true == dialog.ShowDialog())
             {
-                string result = Task.Run(async () => await MakeApiCall()).GetAwaiter().GetResult();
-                tbb_response.Text = result;
+                path = dialog.FileName;
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error: " + ex.Message);
-            }
+            tb_fileName.Text = path;
         }
 
 
@@ -72,10 +61,10 @@ namespace DeepGram_Sample_Project
             using (HttpClient client = new HttpClient())
             { 
                 var request = new HttpRequestMessage(HttpMethod.Post, "https://api.deepgram.com/v1/listen");
-                request.Headers.Add("Authorization", "••••••");
+                client.DefaultRequestHeaders.Add("Authorization", $"Token {apiKey}");
                 request.Content = new StreamContent(File.OpenRead(path));
                 var response = await client.SendAsync(request);
-                response.EnsureSuccessStatusCode();
+               // response.EnsureSuccessStatusCode();
                 Console.WriteLine(await response.Content.ReadAsStringAsync());
 
                 if (response.IsSuccessStatusCode)
@@ -91,10 +80,22 @@ namespace DeepGram_Sample_Project
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog();
-            if (DialogResult.HasValue == dialog.ShowDialog())
+            // Initialize Library with default logging ("Info" level)
+            Library.Initialize();
+
+            // The API key we created in step 3
+            //var deepgramClient = new ListenRESTClient(secret2);
+
+            // Hosted sample file
+            //var audioUrl = "https://static.deepgram.com/examples/Bueller-Life-moves-pretty-fast.wav";
+            try
             {
-                path = dialog.FileName;
+                string result = Task.Run(async () => await MakeApiCall()).GetAwaiter().GetResult();
+                tbb_response.Text = result;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
             }
         }
     }
