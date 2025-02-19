@@ -15,7 +15,7 @@ namespace DeepGram_Sample_Project
     /// </summary>
     public partial class MainWindow : Window
     {
-        internal static string apiKey = "{Api_key}";
+        internal static string apiKey = "{API_KEY}";
         internal static string apiUrl = "https://api.deepgram.com/v1/listen?smart_format=true&model=nova-2&language=en-US";
         internal static string jsonPayload = "{\"url\":\"https://static.deepgram.com/examples/Bueller-Life-moves-pretty-fast.wav\"}";
         internal static string path = String.Empty;
@@ -28,6 +28,8 @@ namespace DeepGram_Sample_Project
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
+            dialog.DefaultExt = ".m4a";
+            dialog.Filter = "Audio Files (*.wav, *.mp3, *.m4a, *.mp4, *.mp2, *.aac, *.flac, *.pcm, *.ogg, *.opus, *.webm)|*.wav;*.mp3;*.m4a;*.mp4;*.mp2;*.aac;*.flac;*.pcm;*.ogg;*.opus;*.webm";
             if (true == dialog.ShowDialog())
             {
                 path = dialog.FileName;
@@ -97,6 +99,28 @@ namespace DeepGram_Sample_Project
             {
                 Console.WriteLine("Error: " + ex.Message);
             }
+            Library.Terminate();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            Library.Initialize();
+
+            // The API key we created in step 3
+            //var deepgramClient = new ListenRESTClient(secret2);
+
+            // Hosted sample file
+            //var audioUrl = "https://static.deepgram.com/examples/Bueller-Life-moves-pretty-fast.wav";
+            try
+            {
+                string result = Task.Run(async () => await MakeApiCallForWebsiteSample()).GetAwaiter().GetResult();
+                tbb_response.Text = result;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+            Library.Terminate();
         }
     }
 }

@@ -7,7 +7,12 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>803572.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="803572.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Deepgram" Version="5.1.0" />
