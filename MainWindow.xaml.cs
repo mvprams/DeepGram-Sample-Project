@@ -4,6 +4,9 @@ using System.Windows;
 using Deepgram.Models.PreRecorded.v1;
 using System.Net.Http;
 using System.Text;
+using Deepgram.Models.Manage.v1;
+using System.IO;
+using Microsoft.Win32;
 
 namespace DeepGram_Sample_Project
 {
@@ -12,11 +15,10 @@ namespace DeepGram_Sample_Project
     /// </summary>
     public partial class MainWindow : Window
     {
-
-
         internal static string apiKey = "{APIKEY_HERE}";
         internal static string apiUrl = "https://api.deepgram.com/v1/listen?smart_format=true&model=nova-2&language=en-US";
         internal static string jsonPayload = "{\"url\":\"https://static.deepgram.com/examples/Bueller-Life-moves-pretty-fast.wav\"}";
+        internal static string path = String.Empty;
 
         public MainWindow()
         {
@@ -45,7 +47,7 @@ namespace DeepGram_Sample_Project
         }
 
 
-        internal static async Task<string> MakeApiCall()
+        internal static async Task<string> MakeApiCallForWebsiteSample()
         {
             using (HttpClient client = new HttpClient())
             {
@@ -62,6 +64,37 @@ namespace DeepGram_Sample_Project
                 {
                     return $"Error: {response.StatusCode}";
                 }
+            }
+        }
+
+        internal static async Task<string> MakeApiCall()
+        {
+            using (HttpClient client = new HttpClient())
+            { 
+                var request = new HttpRequestMessage(HttpMethod.Post, "https://api.deepgram.com/v1/listen");
+                request.Headers.Add("Authorization", "••••••");
+                request.Content = new StreamContent(File.OpenRead(path));
+                var response = await client.SendAsync(request);
+                response.EnsureSuccessStatusCode();
+                Console.WriteLine(await response.Content.ReadAsStringAsync());
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsStringAsync();
+                }
+                else
+                {
+                    return $"Error: {response.StatusCode}";
+                }
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            if (DialogResult.HasValue == dialog.ShowDialog())
+            {
+                path = dialog.FileName;
             }
         }
     }

@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Pick Audio File" HorizontalAlignment="Left" Margin="39,31,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-        <TextBox Name="tb_fileName" HorizontalAlignment="Left" Margin="153,27,0,0" TextWrapping="Wrap" Text="insert audio file" VerticalAlignment="Top" Width="407" Height="28"/>
-        <TextBlock Name="tbb_response" HorizontalAlignment="Left" Margin="39,102,0,0" TextWrapping="Wrap" Text="Response will appear here" VerticalAlignment="Top" Height="300" Width="715"/>
-        <Button Content="Translate Audio to Text" HorizontalAlignment="Left" Margin="39,60,0,0" VerticalAlignment="Top"/>
+        <Button Content="Pick Audio File" HorizontalAlignment="Left" Margin="40,30,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <TextBox Name="tb_fileName" HorizontalAlignment="Left" Margin="150,28,0,0" TextWrapping="Wrap" Text="insert audio file" VerticalAlignment="Top" Width="407" Height="28"/>
+        <TextBlock Name="tbb_response" HorizontalAlignment="Left" Margin="40,100,0,0" TextWrapping="Wrap" Text="Response will appear here" VerticalAlignment="Top" Height="300" Width="715"/>
+        <Button Content="Translate Audio to Text" HorizontalAlignment="Left" Margin="40,60,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
     </Grid>
 </Window>
